@@ -35,3 +35,6 @@ tmp
 
 # environmental
 .env.*
+
+# firebase keys
+firebase/keys

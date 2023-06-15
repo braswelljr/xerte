@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"context"
 	"fmt"
 )
 
@@ -9,9 +8,8 @@ var Store = CtxValues{map[string]interface{}{
 	"token": "",
 	"uid":   "",
 	"roles": []string{},
-}}                                                                   // this is the store that will be used to store the context values
-var ContextKey CtxKey = "xte-api-8kt2"                               // this is the key that will be used to store the context values
-var CXT = context.WithValue(context.Background(), ContextKey, Store) // this is the context that will be used to store the context values
+}}                                     // this is the store that will be used to store the context values
+var ContextKey CtxKey = "xte-api-8kt2" // this is the key that will be used to store the context values
 
 // String - returns the string representation of the context values.
 func (v *CtxValues) String() string {
@@ -34,8 +32,9 @@ func (v *CtxValues) GetCtxValue(key string) interface{} {
 
 // SetValue - sets the value of the context key provided.
 //
-// @param key - string
-// @param value - interface{}
+//	@param key - string
+//	@param value - interface{}
+//	@param error
 func (v *CtxValues) SetCtxValue(key string, value interface{}) error {
 	// check if the key exists in the map
 	if _, ok := v.m[key]; ok {

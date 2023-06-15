@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"time"
+
 	"github.com/golang-jwt/jwt/v4"
 )
 
@@ -16,14 +18,15 @@ type User struct {
 	Othernames  string
 	Username    string
 	Email       string
-	DateOfBirth string
+	DateOfBirth time.Time
 	Phone       string
-	Role        string
+	Roles       []string
 }
 
 type SignedParams struct {
 	User *User
 	jwt.RegisteredClaims
+	Roles []string
 }
 
 // Store Structs

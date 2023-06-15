@@ -10,7 +10,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
 
-	"github.com/braswelljr/xte/routes"
+	"github.com/braswelljr/xerte/routes"
 )
 
 func main() {

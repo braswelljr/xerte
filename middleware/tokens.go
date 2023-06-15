@@ -46,28 +46,6 @@ func ValidateToken(token string) (*SignedParams, error) {
 		return nil, errors.New("authentication failed: token has expired")
 	}
 
-	// set the role in the context
-	if err := Store.SetCtxValue("roles", []string{claims.User.Role}); err != nil {
-		return nil, errors.New("authentication failed: unable to set role in context")
-	}
-
-	// get the role from the context
-	roles := Store.GetCtxValue("roles").([]string)
-	// check if the role is valid
-	if len(roles) < 1 {
-		return nil, errors.New("authentication failed: unable to get role from context")
-	}
-
-	// loop through the roles and check if the role is valid
-	for _, role := range roles {
-		if role == claims.User.Role {
-			// set the user id in the context
-			if err := Store.SetCtxValue("userID", claims.User.ID); err != nil {
-				return nil, errors.New("authentication failed: unable to set user id in context")
-			}
-		}
-	}
-
 	// return the claims
 	return claims, nil
 }
@@ -84,7 +62,8 @@ func GetToken(user *User) (string, error) {
 
 	// create a new token
 	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, &SignedParams{
-		User: user,
+		User:  user,
+		Roles: user.Roles,
 		RegisteredClaims: jwt.RegisteredClaims{
 			Issuer:    ContextKey.(string),
 			Subject:   user.ID,

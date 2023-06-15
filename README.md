@@ -1,4 +1,4 @@
-# xte
+# xerte
 
 xte is a minor API. It might be useful for you. It might not. It's up to you.
 
