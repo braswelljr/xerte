@@ -8,8 +8,8 @@ var Store = CtxValues{map[string]interface{}{
 	"token": "",
 	"uid":   "",
 	"roles": []string{},
-}}                                     // this is the store that will be used to store the context values
-var ContextKey CtxKey = "xte-api-8kt2" // this is the key that will be used to store the context values
+}}                                       // this is the store that will be used to store the context values
+var ContextKey CtxKey = "xerte-api-8kt2" // this is the key that will be used to store the context values
 
 // String - returns the string representation of the context values.
 func (v *CtxValues) String() string {

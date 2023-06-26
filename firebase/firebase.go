@@ -5,8 +5,9 @@ import (
 	_ "embed"
 	"fmt"
 
-	firestore "cloud.google.com/go/firestore"
+	"cloud.google.com/go/firestore"
 	firebase "firebase.google.com/go"
+	"firebase.google.com/go/auth"
 	"google.golang.org/api/option"
 )
 
@@ -15,12 +16,20 @@ var (
 	FirebaseConfig []byte
 )
 
-// InitializeFirebase - is a function that initializes firebase app.
+type Firestore struct {
+	Client *firestore.Client
+}
+
+type Auth struct {
+	Client *auth.Client
+}
+
+// New - is a function that initializes firebase app.
 //
 //	@param ctx - context.Context
 //	@return *firebase.App
 //	@return error
-func InitializeFirebase(ctx context.Context) (*firebase.App, error) {
+func New(ctx context.Context) (*firebase.App, error) {
 	// get the config
 	opts := option.WithCredentialsJSON(FirebaseConfig)
 
@@ -38,9 +47,9 @@ func InitializeFirebase(ctx context.Context) (*firebase.App, error) {
 //	@param ctx - context.Context
 //	@return *firestore.Client
 //	@return error
-func InitializeFirestore(ctx context.Context) (*firestore.Client, error) {
+func InitFirestore(ctx context.Context) (*Firestore, error) {
 	// initialize the app
-	app, err := InitializeFirebase(ctx)
+	app, err := New(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -51,5 +60,26 @@ func InitializeFirestore(ctx context.Context) (*firestore.Client, error) {
 		return nil, fmt.Errorf("failed to initialize firestore client %w", err)
 	}
 
-	return client, nil
+	return &Firestore{Client: client}, nil
+}
+
+// InitAuthentication - is a function that initializes firebase authentication.
+//
+//	@param ctx - context.Context
+//	@return *auth.Client
+//	@return error
+func InitAuth(ctx context.Context) (*Auth, error) {
+	// initialize the app
+	app, err := New(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	// initialize the auth client
+	client, err := app.Auth(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("failed to initialize auth client %w", err)
+	}
+
+	return &Auth{Client: client}, nil
 }

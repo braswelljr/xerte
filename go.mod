@@ -10,14 +10,22 @@ require (
 )
 
 require (
+	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
+	github.com/go-playground/locales v0.14.1 // indirect
+	github.com/go-playground/universal-translator v0.18.1 // indirect
+	github.com/go-playground/validator/v10 v10.14.1 // indirect
+	github.com/leodido/go-urn v1.2.4 // indirect
+)
+
+require (
 	cloud.google.com/go v0.110.2 // indirect
 	cloud.google.com/go/compute v1.20.0 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
-	cloud.google.com/go/firestore v1.10.0 // indirect
+	cloud.google.com/go/firestore v1.10.0
 	cloud.google.com/go/iam v1.1.0 // indirect
 	cloud.google.com/go/longrunning v0.5.0 // indirect
 	cloud.google.com/go/storage v1.30.1 // indirect
-	firebase.google.com/go v3.13.0+incompatible // indirect
+	firebase.google.com/go v3.13.0+incompatible
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect

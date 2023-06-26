@@ -1,4 +1,4 @@
-package user
+package models
 
 import "time"
 
@@ -29,4 +29,11 @@ type UserResponse struct {
 	Roles       []string  `json:"roles"`
 	CreatedAt   time.Time `json:"createdAt"`
 	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
+type SignedParams struct {
+	Fullname string `json:"fullname" validate:"required,min=3"`
+	Email    string `json:"email" validate:"required,email"`
+	Password string `json:"password" validate:"required,min=8"`
+	Phone    string `json:"phone" validate:"required,min=10"`
 }
